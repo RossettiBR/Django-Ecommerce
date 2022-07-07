@@ -3,6 +3,7 @@ astroid==2.11.6
 dill==0.3.5.1
 Django==4.0.6
 django-crispy-forms==1.14.0
+django-debug-toolbar==3.5.0
 flake8==4.0.1
 isort==5.10.1
 lazy-object-proxy==1.7.1
@@ -14,6 +15,8 @@ platformdirs==2.5.2
 pycodestyle==2.8.0
 pyflakes==2.4.0
 pylint==2.14.4
+pylint-django==2.5.3
+pylint-plugin-utils==0.7
 sqlparse==0.4.2
 tomli==2.0.1
 tomlkit==0.11.1
