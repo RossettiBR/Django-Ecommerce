@@ -23,6 +23,7 @@ urlpatterns = [
     path('', include('produtos.urls')),
     path('pedido/', include('pedido.urls')),
     path('perfil/', include('perfil.urls')),
+    path('__debug__/', include('debug_toolbar.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
