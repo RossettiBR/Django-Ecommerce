@@ -1,11 +1,17 @@
 from django.contrib import admin
-from .models import Produto
+from .models import Produto, Variacao
+
+
+class VariacaoInline(admin.TabularInline):
+    model = Variacao
+    extra = 1
 
 
 class ProtudoAdmin(admin.ModelAdmin):
-    list_display = 'id', 'nome', 'preco_marketing', \
-        'preco_marketing_promocional', 'tipo',
-    list_display_links = 'id', 'nome',
+    inlines = [
+        VariacaoInline
+    ]
 
 
 admin.site.register(Produto, ProtudoAdmin)
+admin.site.register(Variacao)

@@ -35,7 +35,7 @@ class Produto(models.Model):
         new_height = round((new_width * original_heigh) / original_widht)
         new_img = img_pil.resize((new_width, new_height), Image.LANCZOS)
 
-        new_img.svae(
+        new_img.save(
             img_full_path,
             optmize=True,
             quality=50
@@ -62,3 +62,7 @@ class Variacao(models.Model):
 
     def __str__(self):
         return self.nome or self.produto.nome
+
+    class Meta:
+        verbose_name = 'Variação'
+        verbose_name_plural = 'Variações'
