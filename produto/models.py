@@ -2,21 +2,6 @@ from django.db import models
 from PIL import Image
 
 
-"""    Produto:
-        Produto:
-            nome - Char
-            descricao_curta - Text
-            descricao_longa - Text
-            imagem - Image
-            slug - Slug
-            preco_marketing - Float
-            preco_marketing_promocional - Float
-            tipo - Choices
-                ('V', 'Variável'),
-                ('S', 'Simples'),
-"""
-
-
 class Produto(models.Model):
     nome = models.CharField(max_length=255)
     descricao_curta = models.TextField(max_length=255)
@@ -34,6 +19,9 @@ class Produto(models.Model):
             ('S', 'Simples'),
         )
     )
+
+    def __str__(self):
+        return self.nome
 
 
 """        Variacao:
