@@ -42,3 +42,6 @@ class Produto(models.Model):
             preco - Float
             preco_promocional - Float
             estoque - Int"""
+
+class Variacao(models.Model):
+    ...
