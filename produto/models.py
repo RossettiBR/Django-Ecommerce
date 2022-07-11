@@ -17,7 +17,7 @@ class Produto(models.Model):
         default='V',
         max_length=1,
         choices=(
-            ('V', 'Variação'),
+            ('V', 'Variável'),
             ('S', 'Simples'),
         )
     )
