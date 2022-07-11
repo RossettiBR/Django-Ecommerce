@@ -1,27 +1,34 @@
+from django.http import  HttpResponse
 from django.shortcuts import render
 from django.views.generic import ListView
 from django.views import View
 
 
-class ListaProdutos(ListView):
-    pass
+class ListaProdutos(View):
+    def get(self, *args, **kwargs):
+        return HttpResponse('Lista Produtos')
 
 
 class DetalheProduto(View):
-    pass
+    def get(self, *args, **kwargs):
+        return HttpResponse('Detalhe Produto')
 
 
 class AdicionarAoCarrinho(View):
-    pass
+    def get(self, *args, **kwargs):
+        return HttpResponse('Adicionar ao Carrinho')
 
 
 class RemoverDoCarrinho(View):
-    pass
+    def get(self, *args, **kwargs):
+        return HttpResponse('Remover do Carrinho')
 
 
 class Carrinho(View):
-    pass
+    def get(self, *args, **kwargs):
+        return HttpResponse('Carrinho')
 
 
 class Finalizar(View):
-    pass
+    def get(self, *args, **kwargs):
+        return HttpResponse('Finalizar')

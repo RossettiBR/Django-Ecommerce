@@ -1,19 +1,25 @@
+from curses.ascii import HT
+from django.http import HttpResponse
 from django.shortcuts import render
 from django.views import View
 from django.views.generic import ListView
 
 
 class Criar(View):
-    pass
+    def get(self, *args, **kwargs):
+        return HttpResponse('Criar')
 
 
 class Atualizar(View):
-    pass
+    def get(self, *args, **kwargs):
+        return HttpResponse('Atualizar')
 
 
 class Login(View):
-    pass
+    def get(self, *args, **kwargs):
+        return HttpResponse('Login')
 
 
 class Logout(View):
-    pass
+    def get(self, *args, **kwargs):
+        return HttpResponse('Logout')
