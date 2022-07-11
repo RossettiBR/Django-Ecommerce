@@ -17,3 +17,4 @@ class FecharPedido(View):
 class Detalhe(View):
     def get(self, *args, **kwargs):
         return HttpResponse('Detalhe')
+    
