@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load omfilters %}
+
 {% block content %}
     <div class="row">
         <div class="col-lg-12">
@@ -20,15 +22,15 @@
 
                                 {% if produto.preco_marketing_promocional %}
                                 <span class="product-price">
-                                    {{ produto.preco_marketing_promocional }}
+                                    {{ produto.preco_marketing_promocional|formata_preco }}
                                 </span>
                                 
                                 <span class="product-old-price text-muted">
-                                    {{ produto.preco_marketing }}
+                                    {{ produto.preco_marketing|formata_preco }}
                                 </span>
                                 {% else %}
                                 <span class="product-price">
-                                    {{ produto.preco_marketing }}
+                                    {{ produto.preco_marketing|formata_preco }}
                                 </span>
                                 {% endif %}
                             </div>
