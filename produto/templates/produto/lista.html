@@ -7,7 +7,12 @@
 
                 {% for produto in produtos %}
                     <div class="card">
-                        <img class="card-img-top" src="{{ produto.imagem.url }}" alt="Card image cap">
+
+                        {% if produto.imagem %}
+                            <a href="{{ produto.slug }}">
+                            <img class="card-img-top" src="{{ produto.imagem.url }}" alt="Card image cap">
+                            </a>
+                        {% endif %}
                         <div class="card-body">
                             <h5 class="card-title">{{ produto.nome }}</h5>
                             <p class="card-text">{{ produto.descricao_curta }}</p>
