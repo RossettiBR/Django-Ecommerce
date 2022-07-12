@@ -1,4 +1,4 @@
-from django.http import  HttpResponse
+from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.generic import ListView
 from django.views import View
@@ -8,6 +8,7 @@ from .models import Produto
 class ListaProdutos(ListView):
     model = Produto
     template_name = 'produto/lista.html'
+    context_object_name = 'produtos'
 
 
 class DetalheProduto(View):
