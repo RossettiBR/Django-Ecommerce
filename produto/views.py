@@ -9,6 +9,7 @@ class ListaProdutos(ListView):
     model = Produto
     template_name = 'produto/lista.html'
     context_object_name = 'produtos'
+    paginate_by = 1
 
 
 class DetalheProduto(View):
