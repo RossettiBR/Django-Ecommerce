@@ -33,12 +33,10 @@
                     <form action="/addtocart/" id="form-add-to-cart">
                         <div class="form-group">
                             <select id="select-variacoes" name="vid" class="form-control form-control-lg">
-                                <option data-preco="R$ 59,90" data-preco-promocional="R$ 39,90" value="45">P
+                                {% for variacao in produto.variacao_set.all %}
+                                <option data-preco="{{ variacao.preco|formata_preco }}" data-preco-promocional="{{ variacao.preco_promocional|formata_preco }}" value="{{ variacao.id }}">{{ variacao.nome }}
                                 </option>
-                                <option data-preco="R$ 51,90" data-preco-promocional="R$ 49,90" value="45">M
-                                </option>
-                                <option data-preco="R$ 52,90" data-preco-promocional="R$ 89,90" value="45">G
-                                </option>
+                                {% endfor %}
                             </select>
                         </div>
 
