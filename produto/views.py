@@ -1,8 +1,10 @@
+from pydoc import describe
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.views import View
+from django.contrib import messages
 from .models import Produto
 
 
@@ -22,7 +24,15 @@ class DetalheProduto(DetailView):
 
 class AdicionarAoCarrinho(View):
     def get(self, *args, **kwargs):
-        return HttpResponse('Adicionar ao Carrinho')
+
+        messages.error(
+            self.request,
+            'Error sai daqui'
+        )
+
+        return redirect(self.request.META['HTTP_REFERER'])
+
+        return HttpResponse('Adicionar ao carrinho')
 
 
 class RemoverDoCarrinho(View):
