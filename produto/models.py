@@ -19,7 +19,7 @@ class Produto(models.Model):
     preco_marketing = models.FloatField(verbose_name='Preço')
     preco_marketing_promocional = models.FloatField(
         default=0,
-        verbose_name='Preço Promo'
+        verbose_name='Preço Promo',
     )
     tipo = models.CharField(
         default='V',
