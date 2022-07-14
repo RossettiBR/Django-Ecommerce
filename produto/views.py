@@ -1,4 +1,4 @@
-from multiprocessing import context
+
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.views.generic import ListView
@@ -7,7 +7,7 @@ from django.views import View
 from django.contrib import messages
 from .models import Produto, Variacao
 
-from pprint import pprint
+
 
 
 class ListaProdutos(ListView):
