@@ -1,3 +1,4 @@
+from multiprocessing import context
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.views.generic import ListView
@@ -123,7 +124,10 @@ class RemoverDoCarrinho(View):
 
 class Carrinho(View):
     def get(self, *args, **kwargs):
-        return render(self.request, 'produto/carrinho.html')
+        contexto = {
+            'carrinho': self.request.session.get('carrinho', {})
+        }
+        return render(self.request, 'produto/carrinho.html', contexto)
 
 
 class Finalizar(View):
