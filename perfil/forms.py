@@ -10,7 +10,7 @@ class PerfilForm(forms.ModelForm):
         exclude = ('usuario',)
 
 
-class Userform(forms.ModelsForm):
+class UserForm(forms.ModelsForm):
     class Meta:
         model = User
         fields = ('first_name', 'last_name', 'username', 'email',

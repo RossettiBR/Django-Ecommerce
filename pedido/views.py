@@ -17,4 +17,3 @@ class SalvarPedido(View):
 class Detalhe(View):
     def get(self, *args, **kwargs):
         return HttpResponse('Detalhe')
-    
