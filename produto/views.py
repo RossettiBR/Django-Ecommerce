@@ -128,16 +128,16 @@ class RemoverDoCarrinho(View):
         if not variacao_id:
             return redirect(http_referer)
 
-        if not self.session.get('carrinho'):
+        if not self.request.session.get('carrinho'):
             return redirect(http_referer)
 
-        if variacao_id not in self.request.session('carrinho'):
+        if variacao_id not in self.request.session.get('carrinho'):
             return redirect(http_referer)
 
-        carrinho = self.request.session['carrinho']
+        carrinho = self.request.session['carrinho'][variacao_id]
 
         messages.success(
-            self.request, 
+            self.request,
             f'Produto {carrinho["produto_nome"]} {carrinho["variacao_nome"]} '
             f'removido do seu carrinho.'
         )
