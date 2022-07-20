@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'pedido',
 ]
 
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -147,7 +149,7 @@ MESSAGE_TAGS = {
     constants.WARNING: 'alert-warning',
 }
 
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
 
 # Sessão em dias: 60s * 60m * 24h * 1d
 SESSION_COOKIE_AGE = 60 * 60 * 24 * 7
