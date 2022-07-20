@@ -4,7 +4,7 @@ from django.views import View
 from django.views.generic import ListView
 
 from . import models
-from .forms import UserForm, PerfilForm
+from . import forms
 
 
 class BasePerfil(View):
@@ -14,18 +14,18 @@ class BasePerfil(View):
         super().setup(*args, **kwargs)
 
         self.contexto = {
-            'uniform': UserForm(data=self.request.POST or None),
-            'perfilform': PerfilForm(data=self.request.POST or None),
+            'userform': forms.UserForm(data=self.request.POST or None),
+            'perfilform': forms.PerfilForm(data=self.request.POST or None),
         }
 
         self.renderizar = render(
             self.request,
             self.template_name,
-            contexto
+            self.contexto
         )
 
     def get(self, *args, **kwargs):
-        return self.get(*args, **kwargs)
+        return self.renderizar
 
 
 class Criar(BasePerfil):
