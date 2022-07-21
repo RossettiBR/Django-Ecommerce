@@ -13,7 +13,13 @@ class BasePerfil(View):
     def setup(self, *args, **kwargs):
         super().setup(*args, **kwargs)
 
+        self.perfil = None
+
         if self.request.user.is_authenticated:
+            self.perfil = models.Perfil.objects.filter(
+                ususario=self.request.user
+            ).first()
+
             self.contexto = {
                 'userform': forms.UserForm(
                     data=self.request.POST or None,
