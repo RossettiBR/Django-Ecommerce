@@ -3,6 +3,7 @@ from django.shortcuts import render, get_object_or_404
 from django.views import View
 from django.views.generic import ListView
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login
 import copy
 
 from . import models
@@ -63,7 +64,9 @@ class Criar(BasePerfil):
         last_name = self.userform.cleaned_data.get('last_name')
 
         if self.request.user.is_authenticated:
-            usuario = get_object_or_404(User, username=self.request.user.username)
+            usuario = get_object_or_404(
+                User, username=self.request.user.username)
+
             usuario.username = username
 
             if password:
@@ -72,6 +75,7 @@ class Criar(BasePerfil):
             usuario.email = email
             usuario.first_name = first_name
             usuario.last_name = last_name
+            usuario.save()
 
         else:
             pass
@@ -82,6 +86,16 @@ class Criar(BasePerfil):
             perfil = self.perfilform.save(commit=False)
             perfil.usuario = usuario
             perfil.save()
+
+        if password:
+            autentica = authenticate(
+                self.request,
+                username=usuario,
+                password=password,
+            )
+
+        if autentica:
+            login(self.request, user=usuario)
 
         self.request.session['carrinho'] = self.carrinho
         self.request.session.save()
