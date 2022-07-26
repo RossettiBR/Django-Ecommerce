@@ -4,11 +4,21 @@
 {% block content %}
 
 <div class="row">
-    <div class="col-lg">
-        <h1>Login</h1>
-    </div>
-    <div class="col-lg">
-        <h1>Cadastro</h1>
+
+    {% if not request.user.is_authenticated %}
+        <div class="col-lg mt-3">
+            <h1>Login</h1>
+            <p>Se você já fez cadastro, basta entrar com seu usuário e senha abaixo:</p>
+        </div>
+    {% endif %}
+
+    <div class="col-lg mt-3">
+
+        {% block titulocadastro %}
+            <h1>Cadastro</h1>
+            <p>Caso ainda não tenha cadastro, utilize o formulário a seguir para se cadastrar</p>
+        {% endblock titulocadastro %}
+
         <form method="POST" action="">
             {% csrf_token %} 
             {{userform|crispy}}
