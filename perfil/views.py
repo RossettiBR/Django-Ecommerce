@@ -45,6 +45,9 @@ class BasePerfil(View):
         self.userform = self.contexto['userform']
         self.perfilform = self.contexto['perfilform']
 
+        if self.request.user.is_authenticated:
+            self.template_name = 'perfil/atualizar.html'
+
         self.renderizar = render(
             self.request,
             self.template_name,
@@ -101,8 +104,8 @@ class Criar(BasePerfil):
                 password=password,
             )
 
-        if autentica:
-            login(self.request, user=usuario)
+            if autentica:
+                login(self.request, user=usuario)
 
         self.request.session['carrinho'] = self.carrinho
         self.request.session.save()
