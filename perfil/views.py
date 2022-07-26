@@ -3,7 +3,7 @@ from django.shortcuts import redirect, render, get_object_or_404
 from django.views import View
 from django.views.generic import ListView
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 import copy
 
@@ -130,10 +130,11 @@ class Atualizar(View):
 
 
 class Login(View):
-    def get(self, *args, **kwargs):
+    def post(self, *args, **kwargs):
         return HttpResponse('Login')
 
 
 class Logout(View):
     def get(self, *args, **kwargs):
-        return HttpResponse('Logout')
+        logout(self.request)
+        return redirect('produto:lista')
