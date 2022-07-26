@@ -31,7 +31,10 @@ class BasePerfil(View):
                     usuario=self.request.user,
                     instance=self.request.user,
                 ),
-                'perfilform': forms.PerfilForm(data=self.request.POST or None),
+                'perfilform': forms.PerfilForm(
+                    data=self.request.POST or None,
+                    instance=self.perfil
+                ),
             }
         else:
             self.contexto = {
@@ -77,8 +80,12 @@ class Criar(BasePerfil):
             usuario.last_name = last_name
             usuario.save()
 
+            if not self.perfil:
+                self.perfilform.cleaned_data['usuario'] = usuario
+                perfil = models.Perfil(**self.perfilform.cleaned_data)
+                perfil.save()
+
         else:
-            pass
             usuario = self.userform.save(commit=False)
             usuario.set_password(password)
             usuario.save()
