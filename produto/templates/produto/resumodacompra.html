@@ -9,41 +9,41 @@
         <p>Caso precise editar, <a href="/userprofile/update/">clique aqui</a></p>
         <dl class="row">
             <dt class="col-lg-2">Nome:</dt>
-            <dd class="col-lg-4">John</dd>
-            <dt class="col-lg-2">Sobrenome:</dt>
-            <dd class="col-lg-4">Caralho</dd>
+            <dd class="col-lg-4">{{ usuario.first_name }}</dd>
+            <dt class="col-lg-2">Sobrenome</dt>
+            <dd class="col-lg-4">{{ usuario.last_name }}</dd>
 
             <dt class="col-lg-2">Idade:</dt>
-            <dd class="col-lg-4">55</dd>
+            <dd class="col-lg-4">{{ usuario.perfil.idade }}</dd>
             <dt class="col-lg-2">Nascimento:</dt>
-            <dd class="col-lg-4">30 de Abril de 1898</dd>
+            <dd class="col-lg-4">{{ usuario.perfil.data_nascimento }}</dd>
 
             <dt class="col-lg-2">CPF:</dt>
-            <dd class="col-lg-4">11111111111</dd>
+            <dd class="col-lg-4">{{ usuario.perfil.cpf}}</dd>
             <dt class="col-lg-2">E-mail:</dt>
-            <dd class="col-lg-4">email@gmail.com</dd>
+            <dd class="col-lg-4">{{ usuario.email }}</dd>
         </dl>
 
         <p class="lead">Dados de endereço</p>
         <p>Caso precise editar, <a href="#">clique aqui</a></p>
         <dl class="row">
             <dt class="col-lg-2">Endereço:</dt>
-            <dd class="col-lg-4">Av. Filho Junior</dd>
+            <dd class="col-lg-4">{{ usuario.perfil.endereço }}</dd>
             <dt class="col-lg-2">Número:</dt>
-            <dd class="col-lg-4">12</dd>
+            <dd class="col-lg-4">{{ usuario.perfil.numero}}</dd>
 
             <dt class="col-lg-2">Complemento:</dt>
-            <dd class="col-lg-4">Casa</dd>
-            <dt class="col-lg-2">Nascimento:</dt>
-            <dd class="col-lg-4">Centro</dd>
+            <dd class="col-lg-4">{{ usuario.perfil.complemento}}</dd>
+            <dt class="col-lg-2">Bairro:</dt>
+            <dd class="col-lg-4">{{ usuario.perfil.bairro }}</dd>
 
             <dt class="col-lg-2">Cidade:</dt>
-            <dd class="col-lg-4">São Paulo</dd>
+            <dd class="col-lg-4">{{ usuario.perfil.cidade }}</dd>
             <dt class="col-lg-2">Estado:</dt>
-            <dd class="col-lg-4">SP</dd>
+            <dd class="col-lg-4">{{ usuario.perfil.estado }}</dd>
 
             <dt class="col-lg-2">CEP:</dt>
-            <dd class="col-lg-4">00000000</dd>
+            <dd class="col-lg-4">{{ usuario.perfil.cep }}</dd>
         </dl>
     </div>
 </div>
