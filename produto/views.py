@@ -1,4 +1,5 @@
 
+from multiprocessing import context
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.views.generic import ListView
@@ -158,4 +159,11 @@ class Carrinho(View):
 
 class ResumoDaCompra(View):
     def get(self, *args, **kwargs):
-        return HttpResponse('Resumo da compra')
+        if not self.request.user.is_authenticated:
+            return redirect('perfil:criar')
+        contexto = {
+            'usuario': self.request.user,
+            'carrinho': self.request.session['carrinho']
+        }
+
+        return render(self.request, 'produto/resumodacompra.html', contexto)
