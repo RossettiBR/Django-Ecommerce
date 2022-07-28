@@ -44,7 +44,15 @@ class Pagar(View):
                 carrinho[vid]['preco_quantitativo'] = estoque * preco_unt
                 carrinho[vid]['preco_quantitativo_promocional'] = estoque * \
                     preco_unit_promo
-                    
+
+                messages.error(
+                    self.request,
+                    'Alguns itens estão com estoque abaixo do desejado para compra.'
+                    'Reduzimos a quantidade desses produtos. Por favor, verifique '
+                    'quais produtos foram afetados a seguir.'
+                )
+                return redirect('produto:carrinho')
+                
         contexto = {}
 
         return render(self.request, self.template_name, contexto)
