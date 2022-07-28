@@ -32,12 +32,14 @@ class Pagar(View):
         )
 
         for variacao in bd_variacoes:
-            vid = variacao.id
+            vid = str(variacao.id)
 
             estoque = variacao.estoque
             qtd_carrinho = carrinho[vid]['quantidade']
             preco_unt = carrinho[vid]['preco_unitario']
             preco_unit_promo = carrinho[vid]['preco_unitario_promocional']
+
+            error_msg_estoque = ''
 
             if estoque < qtd_carrinho:
                 carrinho[vid]['quantidade'] = estoque
@@ -45,14 +47,18 @@ class Pagar(View):
                 carrinho[vid]['preco_quantitativo_promocional'] = estoque * \
                     preco_unit_promo
 
+                error_msg_estoque = 'Alguns itens estão com estoque abaixo do desejado para compra.'
+            'Reduzimos a quantidade desses produtos. Por favor, verifique '
+            'quais produtos foram afetados a seguir.'
+
+            if error_msg_estoque:
                 messages.error(
                     self.request,
-                    'Alguns itens estão com estoque abaixo do desejado para compra.'
-                    'Reduzimos a quantidade desses produtos. Por favor, verifique '
-                    'quais produtos foram afetados a seguir.'
+                    error_msg_estoque
                 )
+                self.request.session.save()
                 return redirect('produto:carrinho')
-                
+
         contexto = {}
 
         return render(self.request, self.template_name, contexto)
