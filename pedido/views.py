@@ -10,6 +10,12 @@ class Pagar(View):
     template_name = 'pedido/pagar.html'
 
     def get(self, *args, **kwargs):
+        if not self.request.user.is_authenticated:
+            messages.error(
+                self.request,
+                'Você precisa estar logado.'
+            )
+            return redirect('perfil:criar')
 
         contexto = {}
 
