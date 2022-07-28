@@ -174,7 +174,7 @@ class ResumoDaCompra(View):
                 'Carrinho vazio.'
             )
             return redirect('produto:lista')
-            
+
         contexto = {
             'usuario': self.request.user,
             'carrinho': self.request.session['carrinho']
