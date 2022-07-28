@@ -17,6 +17,13 @@ class Pagar(View):
             )
             return redirect('perfil:criar')
 
+        if not self.request.session.get('carrinho'):
+            messages.error(
+                self.request,
+                'Carrinho vazio.'
+            )
+            return redirect('produto:lista')
+
         contexto = {}
 
         return render(self.request, self.template_name, contexto)
