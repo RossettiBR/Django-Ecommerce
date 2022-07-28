@@ -1,5 +1,3 @@
-
-from multiprocessing import context
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.views.generic import ListView
@@ -7,8 +5,7 @@ from django.views.generic.detail import DetailView
 from django.views import View
 from django.contrib import messages
 from .models import Produto, Variacao
-
-
+from perfil.models import Perfil
 
 
 class ListaProdutos(ListView):
@@ -161,6 +158,16 @@ class ResumoDaCompra(View):
     def get(self, *args, **kwargs):
         if not self.request.user.is_authenticated:
             return redirect('perfil:criar')
+
+        perfil = Perfil.objects.filter(usuario=self.request.user).exists()
+
+        if not perfil:
+            messages.error(
+                self.request,
+                'Usuário se perfil.'
+            )
+            return redirect('perfil:criar')
+
         contexto = {
             'usuario': self.request.user,
             'carrinho': self.request.session['carrinho']
