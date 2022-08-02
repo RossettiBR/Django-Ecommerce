@@ -37,7 +37,7 @@ class Produto(models.Model):
     def get_preco_promocional_formatado(self):
         return utils.formata_preco(self.preco_marketing_promocional)
     get_preco_promocional_formatado.short_description = 'Preço Promo'
-    
+
     @staticmethod
     def resize_image(img, new_width=800):
         img_full_path = os.path.join(settings.MEDIA_ROOT, img.name)

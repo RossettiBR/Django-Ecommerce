@@ -4,6 +4,8 @@ from django.views.generic import ListView
 from django.views import View
 from django.contrib import messages
 from produto.models import Produto, Variacao
+from . models import Pedido, ItemPedido
+from utils import utils
 
 
 class Pagar(View):
@@ -48,8 +50,8 @@ class Pagar(View):
                     preco_unit_promo
 
                 error_msg_estoque = 'Alguns itens estão com estoque abaixo do desejado para compra.'
-            'Reduzimos a quantidade desses produtos. Por favor, verifique '
-            'quais produtos foram afetados a seguir.'
+                'Reduzimos a quantidade desses produtos. Por favor, verifique '
+                'quais produtos foram afetados a seguir.'
 
             if error_msg_estoque:
                 messages.error(
@@ -59,9 +61,43 @@ class Pagar(View):
                 self.request.session.save()
                 return redirect('produto:carrinho')
 
-        contexto = {}
+        qtd_total_carrinho = utils.cart_total_qtd(carrinho)
+        valor_total_carrinho = utils.cart_totals(carrinho)
 
-        return render(self.request, self.template_name, contexto)
+        pedido = Pedido(
+            usuario=self.request.user,
+            total=valor_total_carrinho,
+            qtd_total=qtd_total_carrinho,
+            status='C',
+        )
+
+        pedido.save()
+
+        ItemPedido.objects.bulk_create(
+            [
+                ItemPedido(
+                    pedido=pedido,
+                    produto=v['produto_nome'],
+                    produto_id=v['produto_id'],
+                    variacao=v['varicao_nome'],
+                    variacao_id=v['variacao_id'],
+                    preco=v['preco_quantitativo'],
+                    preco_promocional=v['preco_quantitativo_promocional'],
+                    quantidade=v['quantidade'],
+                    imagem=v['imagem'],
+                ) for v in carrinho.values()
+            ]
+        )
+
+        del self.request.session['carrinho']
+
+        # return render(self.request, self.template_name)
+        return redirect('pedido:lista')
+
+
+class ListaPedido(View):
+    def get(self, *args, **kwargs):
+        return HttpResponse('Lista pedido')
 
 
 class SalvarPedido(View):

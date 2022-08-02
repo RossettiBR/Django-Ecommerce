@@ -1,24 +1,11 @@
-
 from django.db import models
 from django.contrib.auth.models import User
-
-"""Pedido:
-        user - FK User
-        total - Float
-        status - Choices
-            ('A', 'Aprovado'),
-            ('C', 'Criado'),
-            ('R', 'Reprovado'),
-            ('P', 'Pendente'),
-            ('E', 'Enviado'),
-            ('F', 'Finalizado'),
-
-"""
 
 
 class Pedido(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
     total = models.FloatField()
+    qtd_total = models.PositiveIntegerField()
     status = models.CharField(
         default='C',
         max_length=1,
