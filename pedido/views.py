@@ -9,6 +9,11 @@ from utils import utils
 
 
 class Pagar(View):
+    def get(self, *args, **kwargs):
+        return HttpResponse('PAGAR')
+
+
+class SalvarPedido(View):
     template_name = 'pedido/pagar.html'
 
     def get(self, *args, **kwargs):
@@ -98,11 +103,6 @@ class Pagar(View):
 class ListaPedido(View):
     def get(self, *args, **kwargs):
         return HttpResponse('Lista pedido')
-
-
-class SalvarPedido(View):
-    def get(self, *args, **kwargs):
-        return HttpResponse('FecharPedido')
 
 
 class Detalhe(View):
