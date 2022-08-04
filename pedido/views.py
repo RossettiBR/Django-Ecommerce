@@ -1,6 +1,6 @@
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
-from django.views.generic import ListView
+from django.shortcuts import render, redirect, reverse
+from django.views.generic import ListView, DetailView
 from django.views import View
 from django.contrib import messages
 from produto.models import Produto, Variacao
@@ -8,9 +8,11 @@ from . models import Pedido, ItemPedido
 from utils import utils
 
 
-class Pagar(View):
-    def get(self, *args, **kwargs):
-        return HttpResponse('PAGAR')
+class Pagar(DetailView):
+    template_name = 'pedido/pagar'
+    model = Pedido
+    pk_url_kwarg = 'pk'
+    context_object_name = 'pedido'
 
 
 class SalvarPedido(View):
@@ -66,7 +68,7 @@ class SalvarPedido(View):
                 self.request.session.save()
                 return redirect('produto:carrinho')
 
-        qtd_total_carrinho = utils.cart_total_qtd(carrinho)
+        qtd_total_carrinho = ut'pedido:lista'ils.cart_total_qtd(carrinho)
         valor_total_carrinho = utils.cart_totals(carrinho)
 
         pedido = Pedido(
@@ -97,7 +99,14 @@ class SalvarPedido(View):
         del self.request.session['carrinho']
 
         # return render(self.request, self.template_name)
-        return redirect('pedido:lista')
+        return redirect(
+            reverse(
+                'pedido:pagar',
+                kwargs={
+                    'pk': pedido.pk
+                }
+            )
+        )
 
 
 class ListaPedido(View):
