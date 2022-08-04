@@ -82,7 +82,7 @@ class SalvarPedido(View):
                 self.request.session.save()
                 return redirect('produto:carrinho')
 
-        qtd_total_carrinho = ut'pedido:lista'ils.cart_total_qtd(carrinho)
+        qtd_total_carrinho = utils.cart_total_qtd(carrinho)
         valor_total_carrinho = utils.cart_totals(carrinho)
 
         pedido = Pedido(
