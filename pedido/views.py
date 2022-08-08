@@ -133,4 +133,4 @@ class ListaPedido(DispatchLoginRequiredMixin, ListView):
     context_object_name = 'pedidos'
     template_name = 'pedido/lista.html'
     paginate_by = 10
-
+    ordering = ['-id']
