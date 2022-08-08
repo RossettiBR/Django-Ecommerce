@@ -100,7 +100,7 @@ class SalvarPedido(View):
                     pedido=pedido,
                     produto=v['produto_nome'],
                     produto_id=v['produto_id'],
-                    variacao=v['varicao_nome'],
+                    variacao=v['variacao_nome'],
                     variacao_id=v['variacao_id'],
                     preco=v['preco_quantitativo'],
                     preco_promocional=v['preco_quantitativo_promocional'],
@@ -123,9 +123,11 @@ class SalvarPedido(View):
         )
 
 
-class Detalhe(View):
-    def get(self, *args, **kwargs):
-        return HttpResponse('Detalhe')
+class Detalhe(DispatchLoginRequiredMixin, DetailView):
+    model = Pedido
+    context_object_name = 'pedido'
+    template_name = 'pedido/detalhe.html'
+    pk_url_kwarg = 'pk'
 
 
 class ListaPedido(DispatchLoginRequiredMixin, ListView):

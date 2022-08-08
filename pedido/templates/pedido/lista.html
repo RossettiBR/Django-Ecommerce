@@ -21,7 +21,7 @@
                 {% for pedido in pedidos %}
                 <tr>
                     <th scope="row">{{ pedido }}</td>
-                    <td>{{ pedido.total|cart_total_qtd }}</td>
+                    <td>{{ pedido.total|formata_preco }}</td>
                     <td>{{ pedido.qtd_total }}</td>
                     <td>{{ pedido.get_status_display }}</td>
                     <td>
