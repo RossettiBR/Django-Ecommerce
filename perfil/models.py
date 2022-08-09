@@ -66,10 +66,10 @@ class Perfil(models.Model):
         perfil = Perfil.objects.filter(cpf=cpf_enviado).first()
 
         if perfil:
-            cpf_salvo = perfil.cpf 
+            cpf_salvo = perfil.cpf
 
             if cpf_salvo is not None and self.pk != perfil.pk:
-                error_messages['cpf'] = 'CPF já existe'
+                error_messages['cpf'] = 'CPF já existe.'
 
         if not valida_cpf(self.cpf):
             error_messages['cpf'] = 'Digite um CPF válido.'
